@@ -1,0 +1,20 @@
+MODEL:
+  META_ARCHITECTURE: "GeneralizedRCNN"
+  WEIGHT: "catalog://Caffe2Detectron/COCO/35858791/e2e_mask_rcnn_R-50-C4_1x"
+  ROI_MASK_HEAD:
+    PREDICTOR: "MaskRCNNC4Predictor"
+    SHARE_BOX_FEATURE_EXTRACTOR: True
+  MASK_ON: True
+  KEYPOINT_ON: False
+  ROI_KEYPOINT_HEAD:
+    POOLER_SCALES: (0.25, 0.125, 0.0625, 0.03125)
+    FEATURE_EXTRACTOR: "KeypointRCNNFeatureExtractor"#key特征提取
+    PREDICTOR: "KeypointRCNNPredictor"#keypoints预测
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 2
+    RESOLUTION: 56
+    SHARE_BOX_FEATURE_EXTRACTOR: False
+    MLP_HEAD_DIM: 1024
+DATASETS:
+  TRAIN: ("keypoints_coco_2017_train", "keypoints_coco_2017_val",)
+  TEST: ("keypoints_coco_2017_val",)
